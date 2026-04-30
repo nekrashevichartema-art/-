@@ -7,187 +7,197 @@
 
 <style>
 body {
-  margin:0;
-  font-family: Arial Black;
-  background:#050505;
-  color:white;
+  margin: 0;
+  font-family: Arial Black, Arial, sans-serif;
+  color: white;
+  background: url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center/cover fixed;
 }
 
-/* START */
-#start {
-  position:fixed;
-  inset:0;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:10000;
+/* затемнение */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: -1;
 }
 
-#start button {
-  padding:15px 25px;
-  font-size:18px;
-  background:red;
-  color:white;
-  border:none;
-  border-radius:10px;
-}
-
-/* INTRO */
+/* 🎬 CINEMATIC INTRO */
 #intro {
-  position:fixed;
-  inset:0;
-  background:black;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  z-index:9999;
-  opacity:0;
-  pointer-events:none;
-  transition:1s;
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 4.5s ease forwards;
 }
 
-#intro.show {
-  opacity:1;
-  pointer-events:auto;
-}
-
+/* логотип */
 #intro h1 {
-  color:#f5c518;
-  text-shadow:0 0 30px red;
+  font-size: 48px;
+  color: #f5c518;
+  letter-spacing: 4px;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: logoIn 2.5s ease forwards;
 }
 
-/* MAIN */
-#main
-  {
-  display:none;
-  text-align:center;
+/* появление логотипа */
+@keyframes logoIn {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(5px); }
+  60% { opacity: 1; transform: scale(1.05); filter: blur(0px); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-nav {
-  padding:10px;
-  background:#000;
-  border-bottom:2px solid #f5c518;
+/* исчезновение интро */
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
-.live {
-  color:red;
-  animation:blink 1s infinite;
+/* HEADER */
+header {
+  background: linear-gradient(90deg, #f5c518, #ff0000);
+  padding: 15px;
+  text-align: center;
+  color: black;
 }
 
-@keyframes blink {
-  50% {opacity:0.3;}
-}
-
-.hero
-  <section style="max-width:700px;margin:40px auto;padding:20px;text-align:center;">
-  
-  <h2 style="color:#f5c518;">ОБО МНЕ</h2>
-
-  <p style="color:#aaa;font-size:16px;line-height:1.5;">
-    Я Lesyf — стример, который делает хаос, игры и атмосферу “Better Call Saul” в своём стиле.
-    Тут нет скучных правил — только игры, общение и живые стримы.
-  </p>
-
-  <p style="color:#777;font-size:14px;">
-    Если ты попал сюда — значит уже слишком поздно уходить 😏
-  </p>
-
-</section>{
-  padding:60px 20px;
-  background:url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
 }
 
 .hero h1 {
-  color:#f5c518;
+  font-size: 44px;
+  color: #f5c518;
 }
 
+/* SYMBOLS */
+.symbols {
+  text-align: center;
+  font-size: 24px;
+}
+
+.sword {
+  color: #66ff66;
+  display: inline-block;
+  transition: transform 0.1s linear;
+}
+
+/* BLOCK */
+.block {
+  text-align: center;
+  padding: 20px;
+}
+
+/* BUTTON */
+.btn {
+  background: red;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 5px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* STREAM */
 .container {
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  padding:20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
 }
 
 iframe {
-  border:2px solid #f5c518;
-  border-radius:10px;
+  border: 2px solid #f5c518;
+  border-radius: 10px;
 }
 
-.btn {
-  display:inline-block;
-  padding:10px 15px;
-  margin:5px;
-  background:#ff2b2b;
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
+/* CONTACTS */
+.contacts {
+  text-align: center;
+  padding: 30px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  iframe {
+    width: 95%;
+    height: 300px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🔊 SOUND -->
-<audio id="ring" preload="auto">
-  <source src="https://www.soundjay.com/phone/sounds/telephone-ring-01a.mp3">
-</audio>
-
-<!-- START -->
-<div id="start">
-  <button onclick="startSite()">ENTER SITE</button>
-</div>
-
-<!-- INTRO -->
+<!-- 🎬 INTRO -->
 <div id="intro">
-  <h1>BETTER CALL LESYF ⚖️</h1>
-  <p>HBO EXPERIENCE</p>
+  <h1>BETTER CALL LESYF</h1>
 </div>
 
-<!-- MAIN -->
-<div id="main">
+<header>
+  BETTER CALL LESYF ⚖️
+</header>
 
-<nav>
-  LESYF LIVE HUB <span class="live">● LIVE</span>
-</nav>
+<section class="hero">
+  <h1>SAUL OFFICE</h1>
+  <p>стримы, игры и хаос</p>
+</section>
 
-<div class="hero">
-  <h1>АДВОКАТ СКУКИ</h1>
+<div class="symbols">
+  ⚖ <span class="sword" id="sword">⚔</span> LESYF <span class="sword" id="sword2">⚔</span> ⚖
 </div>
 
-<a class="btn" href="https://www.twitch.tv/say_lesyf" target="_blank">WATCH LIVE</a>
+<div class="block">
+  <h2>ОБО МНЕ</h2>
+  <p>Стримы, игры и стиль в духе Better Call Saul.</p>
+</div>
 
 <div class="container">
   <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-  height="400" width="700" allowfullscreen></iframe>
+  height="400" width="700"></iframe>
 
-  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+  <iframe src="https://www.twitch.tv/embed/say_lesyf?parent=nekrashevichartema-art.github.io"
   height="400" width="300"></iframe>
 </div>
 
-</div>
+<section class="contacts">
+  <h2>Контакты</h2>
+
+  <a class="btn" style="background:#2AABEE;" href="https://t.me/T1mas_Shelbi">Telegram</a>
+  <a class="btn" style="background:#5865F2;" href="https://discord.com/users/artem_shelbyl">Discord</a>
+</section>
 
 <script>
-function startSite() {
+document.addEventListener("mousemove", (e) => {
 
-  // показать сайт
-  document.getElementById("start").style.display = "none";
-  document.getElementById("intro").classList.add("show");
+  let x = (e.clientX / window.innerWidth - 0.5) * 20;
+  let y = (e.clientY / window.innerHeight - 0.5) * 20;
 
-  const audio = document.getElementById("ring");
+  document.getElementById("sword").style.transform =
+    `translate(${x}px, ${y}px) rotate(${x}deg)`;
 
-  // 🔥 ВАЖНО: звук только после клика (это работает)
-  audio.play().catch(() => {
-    console.log("Audio blocked");
-  });
-
-  setTimeout(() => {
-    document.getElementById("intro").style.display = "none";
-    document.getElementById("main").style.display = "block";
-  }, 3000);
-}
+  document.getElementById("sword2").style.transform =
+    `translate(${-x}px, ${-y}px) rotate(${-x}deg)`;
+});
 </script>
 
 </body>

@@ -1,207 +1,227 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Better Call Lesyf</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Better Call Lesyf</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Arial Black', Arial, sans-serif;
-      background: #111;
-      color: #fff;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial Black, Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+  overflow-x: hidden;
+}
 
-    header {
-      background: linear-gradient(90deg, #f5c518, #ff0000);
-      padding: 20px;
-      text-align: center;
-      color: black;
-      font-size: 28px;
-      letter-spacing: 2px;
-    }
+/* 🎬 INTRO */
+#intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 2.5s ease forwards;
+  animation-delay: 2s;
+}
 
-    .hero {
-      text-align: center;
-      padding: 40px 20px;
-      background: url('https://images.unsplash.com/photo-1534447677768-be436bb09401') center/cover;
-      background-size: cover;
-    }
+#intro h1 {
+  color: #f5c518;
+  font-size: 40px;
+  text-shadow: 0 0 20px red;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      color: #f5c518;
-      text-shadow: 2px 2px 10px black;
-    }
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
 
-    .hero p {
-      font-size: 18px;
-    }
+/* HEADER */
+header {
+  background: linear-gradient(90deg, #f5c518, #ff2b2b);
+  text-align: center;
+  padding: 15px;
+  color: black;
+  font-size: 24px;
+}
 
-    .btn {
-      background: red;
-      color: white;
-      padding: 12px 25px;
-      text-decoration: none;
-      border-radius: 5px;
-      display: inline-block;
-      margin-top: 15px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
+}
 
-    .btn:hover {
-      background: #ff4444;
-      transform: scale(1.05);
-    }
+.hero h1 {
+  font-size: 40px;
+  color: #f5c518;
+  text-shadow: 0 0 15px black;
+  animation: glow 2s infinite alternate;
+}
 
-    .container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      flex-wrap: wrap;
-    }
+@keyframes glow {
+  from { text-shadow: 0 0 5px #f5c518; }
+  to { text-shadow: 0 0 25px red; }
+}
 
-    iframe {
-      border-radius: 10px;
-      border: 3px solid #f5c518;
-      max-width: 100%;
-    }
+/* PROFILE CARD */
+.profile {
+  max-width: 500px;
+  margin: 20px auto;
+  background: #151515;
+  padding: 20px;
+  border-left: 5px solid #f5c518;
+  text-align: center;
+  border-radius: 10px;
+}
 
-    .ad {
-      background: #f5c518;
-      color: black;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      border: 5px dashed red;
-      text-align: center;
-    }
+.profile p {
+  color: #aaa;
+}
 
-    .services {
-      max-width: 900px;
-      margin: 20px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      padding: 0 10px;
-    }
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .card {
-      background: #1c1c1f;
-      padding: 15px;
-      border-left: 5px solid red;
-    }
+.btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.3);
+}
 
-    .contacts {
-      text-align: center;
-      padding: 30px;
-    }
+/* STREAM */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      margin-top: 40px;
-      font-size: 14px;
-    }
+iframe {
+  border-radius: 10px;
+  border: 3px solid #f5c518;
+}
 
-    /* 📱 МОБИЛЬНАЯ ВЕРСИЯ */
-    @media (max-width: 768px) {
+/* SERVICES */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  max-width: 900px;
+  margin: auto;
+  padding: 10px;
+}
 
-      .hero h1 {
-        font-size: 32px;
-      }
+.card {
+  background: #1b1b1b;
+  padding: 15px;
+  border-left: 4px solid red;
+  transition: 0.3s;
+}
 
-      .hero p {
-        font-size: 14px;
-      }
+.card:hover {
+  transform: translateY(-5px);
+  background: #222;
+}
 
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
+/* CONTACTS */
+.contacts {
+  text-align: center;
+  padding: 30px;
+}
 
-      iframe {
-        width: 95%;
-        height: 300px;
-      }
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: black;
+  font-size: 12px;
+  color: #777;
+}
 
-      .btn {
-        display: block;
-        width: 80%;
-        margin: 10px auto;
-        text-align: center;
-      }
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
 
-      header {
-        font-size: 20px;
-      }
-    }
-  </style>
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  iframe {
+    width: 95%;
+    height: 300px;
+  }
+
+  .btn {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  BETTER CALL LESYF ⚖️
-</header>
-
-<section class="hero">
-  <h1>Лучше смотри стрим 😏</h1>
-  <p>Игры, хаос и немного "юридических" советов</p>
-  <a class="btn" href="https://www.twitch.tv/say_lesyf" target="_blank">
-    Смотреть на Twitch
-  </a>
-</section>
-
-<div class="container">
-  <iframe 
-    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-    height="400"
-    width="700"
-    allowfullscreen>
-  </iframe>
-
-  <iframe 
-    src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
-    height="400"
-    width="300">
-  </iframe>
+<!-- 🎬 INTRO -->
+<div id="intro">
+  <h1>BETTER CALL LESYF ⚖️</h1>
 </div>
 
-<section class="ad">
-  <h2>ПОПАЛ В СКУЧНЫЙ ВЕЧЕР?</h2>
-  <p>ЗВОНИ... ТО ЕСТЬ СМОТРИ LESYF!</p>
+<header>BETTER CALL LESYF ⚖️</header>
+
+<section class="hero">
+  <h1>Адвокат скуки</h1>
 </section>
 
+<!-- 👤 PROFILE -->
+<div class="profile">
+  <h2>Lesyf</h2>
+  <p>Стримы, игры, хаос и “юридическая магия”</p>
+
+  <a class="btn" style="background:#ff2b2b;" href="https://www.twitch.tv/say_lesyf" target="_blank">Twitch</a>
+</div>
+
+<!-- STREAM -->
+<div class="container">
+  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+  height="400" width="700" allowfullscreen></iframe>
+
+  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+  height="400" width="300"></iframe>
+</div>
+
+<!-- SERVICES -->
 <section class="services">
-  <div class="card">🎮 Игровые стримы</div>
-  <div class="card">😂 Мемы и угар</div>
-  <div class="card">🔥 Общение с чатом</div>
-  <div class="card">⚖️ "Юридическая помощь" (почти)</div>
+  <div class="card">🎮 Игры</div>
+  <div class="card">😂 Мемы</div>
+  <div class="card">🔥 Чат</div>
+  <div class="card">⚖️ Адвокат</div>
 </section>
 
+<!-- CONTACTS -->
 <section class="contacts">
-  <h2>Связь со мной</h2>
+  <h2>Связь</h2>
 
-  <a class="btn" style="background:#2AABEE;" href="https://t.me/T1mas_Shelbi" target="_blank">
-    Telegram
-  </a>
+  <a class="btn" style="background:#2AABEE;" href="https://t.me/T1mas_Shelbi" target="_blank">Telegram</a>
 
-  <a class="btn" style="background:#5865F2;" href="https://discord.gg/INVITE" target="_blank">
-    Discord
-  </a>
-  <a class="btn" style="background:#1b2838;" href="https://s.team/p/jkqg-wjtq/WPDPGRHC" target="_blank">
-  Steam
-</a>
+  <a class="btn" style="background:#1b2838;" href="https://steamcommunity.com/profiles/76561199700178651" target="_blank">Steam</a>
+
+  <p>Discord: artem_shelbyl</p>
 </section>
 
-<footer>
-  <p>© 2026 Better Call Lesyf</p>
-</footer>
+<footer>© 2026 Better Call Lesyf</footer>
 
 </body>
 </html>

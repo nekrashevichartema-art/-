@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesyf Live Hub</title>
+<title>Better Call Lesyf</title>
 
 <style>
 body {
@@ -13,34 +13,62 @@ body {
   color:white;
 }
 
-nav {
+/* START */
+#start {
+  position:fixed;
+  inset:0;
+  background:black;
   display:flex;
   justify-content:center;
-  gap:20px;
-  padding:15px;
+  align-items:center;
+  z-index:10000;
+}
+
+#start button {
+  padding:15px 25px;
+  font-size:18px;
+  background:red;
+  color:white;
+  border:none;
+  border-radius:10px;
+}
+
+/* INTRO */
+#intro {
+  position:fixed;
+  inset:0;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:1s;
+}
+
+#intro.show {
+  opacity:1;
+  pointer-events:auto;
+}
+
+#intro h1 {
+  color:#f5c518;
+  text-shadow:0 0 30px red;
+}
+
+/* MAIN */
+#main
+  {
+  display:none;
+  text-align:center;
+}
+
+nav {
+  padding:10px;
   background:#000;
   border-bottom:2px solid #f5c518;
-}
-
-nav a {
-  color:white;
-  text-decoration:none;
-  transition:0.2s;
-}
-
-nav a:hover {
-  color:#f5c518;
-}
-
-.hero {
-  text-align:center;
-  padding:60px 20px;
-  background:url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
-}
-
-.hero h1 {
-  color:#f5c518;
-  font-size:40px;
 }
 
 .live {
@@ -50,6 +78,29 @@ nav a:hover {
 
 @keyframes blink {
   50% {opacity:0.3;}
+}
+
+.hero
+  <section style="max-width:700px;margin:40px auto;padding:20px;text-align:center;">
+  
+  <h2 style="color:#f5c518;">ОБО МНЕ</h2>
+
+  <p style="color:#aaa;font-size:16px;line-height:1.5;">
+    Я Lesyf — стример, который делает хаос, игры и атмосферу “Better Call Saul” в своём стиле.
+    Тут нет скучных правил — только игры, общение и живые стримы.
+  </p>
+
+  <p style="color:#777;font-size:14px;">
+    Если ты попал сюда — значит уже слишком поздно уходить 😏
+  </p>
+
+</section>{
+  padding:60px 20px;
+  background:url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
+}
+
+.hero h1 {
+  color:#f5c518;
 }
 
 .container {
@@ -65,35 +116,79 @@ iframe {
   border-radius:10px;
 }
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#777;
+.btn {
+  display:inline-block;
+  padding:10px 15px;
+  margin:5px;
+  background:#ff2b2b;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="links.html">Links</a>
-</nav>
+<!-- 🔊 SOUND -->
+<audio id="ring" preload="auto">
+  <source src="https://www.soundjay.com/phone/sounds/telephone-ring-01a.mp3">
+</audio>
 
-<section class="hero">
-  <h1>LESYF LIVE HUB <span class="live">● LIVE</span></h1>
-  <p>Стримы • игры • хаос</p>
-</section>
-
-<div class="container">
-  <iframe
-    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-    height="400" width="700" allowfullscreen>
-  </iframe>
+<!-- START -->
+<div id="start">
+  <button onclick="startSite()">ENTER SITE</button>
 </div>
 
-<footer>© Lesyf Brand</footer>
+<!-- INTRO -->
+<div id="intro">
+  <h1>BETTER CALL LESYF ⚖️</h1>
+  <p>HBO EXPERIENCE</p>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<nav>
+  LESYF LIVE HUB <span class="live">● LIVE</span>
+</nav>
+
+<div class="hero">
+  <h1>АДВОКАТ СКУКИ</h1>
+</div>
+
+<a class="btn" href="https://www.twitch.tv/say_lesyf" target="_blank">WATCH LIVE</a>
+
+<div class="container">
+  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+  height="400" width="700" allowfullscreen></iframe>
+
+  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+  height="400" width="300"></iframe>
+</div>
+
+</div>
+
+<script>
+function startSite() {
+
+  // показать сайт
+  document.getElementById("start").style.display = "none";
+  document.getElementById("intro").classList.add("show");
+
+  const audio = document.getElementById("ring");
+
+  // 🔥 ВАЖНО: звук только после клика (это работает)
+  audio.play().catch(() => {
+    console.log("Audio blocked");
+  });
+
+  setTimeout(() => {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "block";
+  }, 3000);
+}
+</script>
 
 </body>
 </html>

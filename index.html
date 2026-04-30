@@ -10,19 +10,37 @@ body {
   margin: 0;
   font-family: Arial Black, Arial, sans-serif;
   color: white;
+
   background: url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center/cover fixed;
 }
 
-/* затемнение */
+/* затемнение базы */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
-  z-index: -1;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.75));
+  z-index: -2;
 }
 
-/* 🎬 CINEMATIC INTRO */
+/* 🎬 КИНО-ВИНЬЕТКА */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0) 35%,
+    rgba(0,0,0,0.25) 60%,
+    rgba(0,0,0,0.65) 100%
+  );
+
+  z-index: 0;
+}
+
+/* 🎬 INTRO */
 #intro {
   position: fixed;
   inset: 0;
@@ -34,46 +52,47 @@ body::before {
   animation: fadeOut 4.5s ease forwards;
 }
 
-/* логотип */
 #intro h1 {
-  font-size: 48px;
+  font-size: 52px;
   color: #f5c518;
   letter-spacing: 4px;
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.85);
   animation: logoIn 2.5s ease forwards;
 }
 
-/* появление логотипа */
 @keyframes logoIn {
-  0% { opacity: 0; transform: scale(0.8); filter: blur(5px); }
-  60% { opacity: 1; transform: scale(1.05); filter: blur(0px); }
+  0% { opacity: 0; transform: scale(0.85); filter: blur(6px); }
+  60% { opacity: 1; transform: scale(1.05); filter: blur(0); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* исчезновение интро */
 @keyframes fadeOut {
   0% { opacity: 1; }
-  70% { opacity: 1; }
+  80% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
 }
 
 /* HEADER */
 header {
-  background: linear-gradient(90deg, #f5c518, #ff0000);
-  padding: 15px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
   text-align: center;
-  color: black;
+  padding: 15px;
+  color: #f5c518;
+  position: relative;
+  z-index: 2;
 }
 
 /* HERO */
 .hero {
   text-align: center;
   padding: 50px 20px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero h1 {
-  font-size: 44px;
   color: #f5c518;
 }
 
@@ -81,29 +100,31 @@ header {
 .symbols {
   text-align: center;
   font-size: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .sword {
   color: #66ff66;
   display: inline-block;
-  transition: transform 0.1s linear;
 }
 
 /* BLOCK */
 .block {
   text-align: center;
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 /* BUTTON */
 .btn {
-  background: red;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 8px;
-  text-decoration: none;
   display: inline-block;
+  padding: 12px 18px;
   margin: 5px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
   transition: 0.2s;
 }
 
@@ -111,13 +132,20 @@ header {
   transform: scale(1.05);
 }
 
+/* COLORS */
+.tg { background: #2AABEE; }
+.dc { background: #5865F2; }
+.st { background: #1b2838; }
+
 /* STREAM */
 .container {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 20px;
+  flex-wrap: wrap;
   padding: 20px;
+  position: relative;
+  z-index: 2;
 }
 
 iframe {
@@ -128,7 +156,9 @@ iframe {
 /* CONTACTS */
 .contacts {
   text-align: center;
-  padding: 30px;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
 }
 
 /* MOBILE */
@@ -148,7 +178,7 @@ iframe {
 
 <body>
 
-<!-- 🎬 INTRO -->
+<!-- INTRO -->
 <div id="intro">
   <h1>BETTER CALL LESYF</h1>
 </div>
@@ -163,7 +193,7 @@ iframe {
 </section>
 
 <div class="symbols">
-  ⚖ <span class="sword" id="sword">⚔</span> LESYF <span class="sword" id="sword2">⚔</span> ⚖
+  ⚖ <span class="sword">⚔</span> LESYF <span class="sword">⚔</span> ⚖
 </div>
 
 <div class="block">
@@ -182,23 +212,10 @@ iframe {
 <section class="contacts">
   <h2>Контакты</h2>
 
-  <a class="btn" style="background:#2AABEE;" href="https://t.me/T1mas_Shelbi">Telegram</a>
-  <a class="btn" style="background:#5865F2;" href="https://discord.com/users/artem_shelbyl">Discord</a>
+  <a class="btn tg" href="https://t.me/T1mas_Shelbi">📩 Telegram — перейти</a>
+  <a class="btn dc" href="https://discord.com/users/artem_shelbyl">💬 Discord — перейти</a>
+  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/">🎮 Steam — перейти</a>
 </section>
-
-<script>
-document.addEventListener("mousemove", (e) => {
-
-  let x = (e.clientX / window.innerWidth - 0.5) * 20;
-  let y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-  document.getElementById("sword").style.transform =
-    `translate(${x}px, ${y}px) rotate(${x}deg)`;
-
-  document.getElementById("sword2").style.transform =
-    `translate(${-x}px, ${-y}px) rotate(${-x}deg)`;
-});
-</script>
 
 </body>
 </html>

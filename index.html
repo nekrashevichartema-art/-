@@ -14,33 +14,31 @@ body {
   background: url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center/cover fixed;
 }
 
-/* затемнение базы */
+/* затемнение */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.75));
+  background: radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
   z-index: -2;
 }
 
-/* 🎬 КИНО-ВИНЬЕТКА */
+/* кино-виньетка */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-
   background: radial-gradient(
     ellipse at center,
-    rgba(0,0,0,0) 35%,
-    rgba(0,0,0,0.25) 60%,
-    rgba(0,0,0,0.65) 100%
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,0.35) 70%,
+    rgba(0,0,0,0.75) 100%
   );
-
   z-index: 0;
 }
 
-/* 🎬 INTRO */
+/* INTRO */
 #intro {
   position: fixed;
   inset: 0;
@@ -56,14 +54,12 @@ body::after {
   font-size: 52px;
   color: #f5c518;
   letter-spacing: 4px;
-  opacity: 0;
-  transform: scale(0.85);
   animation: logoIn 2.5s ease forwards;
 }
 
 @keyframes logoIn {
-  0% { opacity: 0; transform: scale(0.85); filter: blur(6px); }
-  60% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  0% { opacity: 0; transform: scale(0.85); }
+  60% { opacity: 1; transform: scale(1.05); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -75,8 +71,8 @@ body::after {
 
 /* HEADER */
 header {
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
   text-align: center;
   padding: 15px;
   color: #f5c518;
@@ -87,7 +83,7 @@ header {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 50px 20px;
+  padding: 40px 20px;
   position: relative;
   z-index: 2;
 }
@@ -104,11 +100,6 @@ header {
   z-index: 2;
 }
 
-.sword {
-  color: #66ff66;
-  display: inline-block;
-}
-
 /* BLOCK */
 .block {
   text-align: center;
@@ -116,26 +107,6 @@ header {
   position: relative;
   z-index: 2;
 }
-
-/* BUTTON */
-.btn {
-  display: inline-block;
-  padding: 12px 18px;
-  margin: 5px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: white;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* COLORS */
-.tg { background: #2AABEE; }
-.dc { background: #5865F2; }
-.st { background: #1b2838; }
 
 /* STREAM */
 .container {
@@ -152,6 +123,21 @@ iframe {
   border: 2px solid #f5c518;
   border-radius: 10px;
 }
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 12px 18px;
+  margin: 5px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+/* COLORS */
+.tg { background: #2AABEE; }
+.dc { background: #5865F2; }
+.st { background: #1b2838; }
 
 /* CONTACTS */
 .contacts {
@@ -193,7 +179,7 @@ iframe {
 </section>
 
 <div class="symbols">
-  ⚖ <span class="sword">⚔</span> LESYF <span class="sword">⚔</span> ⚖
+  ⚖ ⚔ LESYF ⚔ ⚖
 </div>
 
 <div class="block">
@@ -201,20 +187,33 @@ iframe {
   <p>Стримы, игры и стиль в духе Better Call Saul.</p>
 </div>
 
+<!-- TWITCH (100% WORKING) -->
 <div class="container">
-  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-  height="400" width="700"></iframe>
 
-  <iframe src="https://www.twitch.tv/embed/say_lesyf?parent=nekrashevichartema-art.github.io"
-  height="400" width="300"></iframe>
+  <iframe
+    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+    height="400"
+    width="700"
+    allowfullscreen>
+  </iframe>
+
+  <iframe
+    src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+    height="400"
+    width="300">
+  </iframe>
+
 </div>
 
+<!-- CONTACTS -->
 <section class="contacts">
+
   <h2>Контакты</h2>
 
-  <a class="btn tg" href="https://t.me/T1mas_Shelbi">📩 Telegram — перейти</a>
-  <a class="btn dc" href="https://discord.com/users/artem_shelbyl">💬 Discord — перейти</a>
-  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/">🎮 Steam — перейти</a>
+  <a class="btn tg" href="https://t.me/T1mas_Shelbi">Telegram</a>
+  <a class="btn dc" href="https://discord.com/users/artem_shelbyl">Discord</a>
+  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/">Steam</a>
+
 </section>
 
 </body>

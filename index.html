@@ -3,238 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Better Call Lesyf</title>
+<title>Lesyf Live Hub</title>
 
 <style>
 body {
-  margin: 0;
-  font-family: Arial Black, Arial, sans-serif;
-  background: #070707;
-  color: white;
-  overflow-x: hidden;
+  margin:0;
+  font-family: Arial Black;
+  background:#050505;
+  color:white;
 }
 
-/* 🎬 INTRO */
-#intro {
-  position: fixed;
-  inset: 0;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: introFade 2.8s ease forwards;
-  animation-delay: 1.8s;
-}
-
-#intro h1 {
-  font-size: 42px;
-  color: #f5c518;
-  text-shadow: 0 0 25px red;
-  animation: pulse 1.2s infinite alternate;
-}
-
-@keyframes introFade {
-  to { opacity: 0; visibility: hidden; }
-}
-
-@keyframes pulse {
-  from { transform: scale(1); }
-  to { transform: scale(1.08); }
-}
-
-/* 🧭 NAVBAR */
 nav {
-  position: sticky;
-  top: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
-  padding: 10px;
-  text-align: center;
-  z-index: 100;
-  border-bottom: 2px solid #f5c518;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  padding:15px;
+  background:#000;
+  border-bottom:2px solid #f5c518;
 }
 
-/* HEADER */
-header {
-  text-align: center;
-  padding: 25px;
-  font-size: 24px;
-  background: linear-gradient(90deg, #f5c518, #ff2b2b);
-  color: black;
+nav a {
+  color:white;
+  text-decoration:none;
+  transition:0.2s;
 }
 
-/* HERO */
+nav a:hover {
+  color:#f5c518;
+}
+
 .hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
+  text-align:center;
+  padding:60px 20px;
+  background:url('https://images.unsplash.com/photo-1528747045269-390fe33c19c1') center/cover;
 }
 
 .hero h1 {
-  font-size: 44px;
-  color: #f5c518;
-  text-shadow: 0 0 20px black;
-  animation: glow 2s infinite alternate;
+  color:#f5c518;
+  font-size:40px;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 5px #f5c518; }
-  to { text-shadow: 0 0 30px red; }
+.live {
+  color:red;
+  animation:blink 1s infinite;
 }
 
-/* PROFILE CARD (glass effect) */
-.profile {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  text-align: center;
-
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+@keyframes blink {
+  50% {opacity:0.3;}
 }
 
-/* BUTTONS */
-.btn {
-  display: inline-block;
-  padding: 12px 18px;
-  margin: 8px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: 0.25s;
-}
-
-.btn:hover {
-  transform: scale(1.07);
-  filter: brightness(1.4);
-}
-
-/* STREAM */
 .container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 20px;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  padding:20px;
 }
 
 iframe {
-  border-radius: 12px;
-  border: 2px solid #f5c518;
+  border:2px solid #f5c518;
+  border-radius:10px;
 }
 
-/* SERVICES */
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  max-width: 900px;
-  margin: auto;
-  gap: 15px;
-  padding: 10px;
-}
-
-.card {
-  background: #111;
-  padding: 15px;
-  border-left: 4px solid red;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  background: #1a1a1a;
-}
-
-/* CONTACTS */
-.contacts {
-  text-align: center;
-  padding: 30px;
-}
-
-/* FOOTER */
 footer {
-  text-align: center;
-  padding: 20px;
-  background: black;
-  font-size: 12px;
-  color: #777;
-}
-
-/* 📱 MOBILE */
-@media (max-width: 768px) {
-  .hero h1 { font-size: 28px; }
-
-  .container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  iframe {
-    width: 95%;
-    height: 300px;
-  }
-
-  .btn {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-  }
+  text-align:center;
+  padding:20px;
+  color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎬 INTRO -->
-<div id="intro">
-  <h1>BETTER CALL LESYF ⚖️</h1>
-</div>
-
-<nav>⚖️ LESYF LIVE HUB</nav>
-
-<header>BETTER CALL LESYF ⚖️</header>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="links.html">Links</a>
+</nav>
 
 <section class="hero">
-  <h1>АДВОКАТ СКУКИ</h1>
+  <h1>LESYF LIVE HUB <span class="live">● LIVE</span></h1>
+  <p>Стримы • игры • хаос</p>
 </section>
-
-<div class="profile">
-  <h2>Lesyf</h2>
-  <p>Стримы • игры • хаос • “юридическая магия”</p>
-
-  <a class="btn" style="background:#ff2b2b;" href="https://www.twitch.tv/say_lesyf" target="_blank">Twitch</a>
-</div>
 
 <div class="container">
-  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-  height="400" width="700" allowfullscreen></iframe>
-
-  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
-  height="400" width="300"></iframe>
+  <iframe
+    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+    height="400" width="700" allowfullscreen>
+  </iframe>
 </div>
 
-<section class="services">
-  <div class="card">🎮 Игры</div>
-  <div class="card">😂 Мемы</div>
-  <div class="card">🔥 Чат</div>
-  <div class="card">⚖️ “Адвокат”</div>
-</section>
-
-<section class="contacts">
-  <h2>Связь</h2>
-
-  <a class="btn" style="background:#2AABEE;" href="https://t.me/T1mas_Shelbi" target="_blank">Telegram</a>
-
-  <a class="btn" style="background:#1b2838;" href="https://steamcommunity.com/profiles/76561199700178651" target="_blank">Steam</a>
-
-  <p>Discord: artem_shelbyl</p>
-</section>
-
-<footer>© 2026 Better Call Lesyf</footer>
+<footer>© Lesyf Brand</footer>
 
 </body>
 </html>

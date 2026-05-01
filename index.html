@@ -12,11 +12,9 @@ body {
   font-family: Arial Black, Arial, sans-serif;
   color: white;
   overflow-x: hidden;
-
   background: url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center/cover fixed;
 }
 
-/* затемнение */
 body::before {
   content: "";
   position: fixed;
@@ -25,7 +23,6 @@ body::before {
   z-index: -2;
 }
 
-/* виньетка */
 body::after {
   content: "";
   position: fixed;
@@ -34,7 +31,6 @@ body::after {
   background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.8) 100%);
 }
 
-/* INTRO */
 #intro {
   position: fixed;
   inset: 0;
@@ -65,7 +61,6 @@ body::after {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* HEADER */
 header {
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
@@ -74,7 +69,6 @@ header {
   color: #f5c518;
 }
 
-/* HERO */
 .hero {
   text-align: center;
   padding: 40px 20px;
@@ -90,7 +84,6 @@ header {
   to { text-shadow: 0 0 20px #f5c518; }
 }
 
-/* FADE */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -102,26 +95,22 @@ header {
   transform: translateY(0);
 }
 
-/* SYMBOLS */
 .symbols {
   text-align: center;
   font-size: 24px;
 }
 
-/* BLOCK */
 .block {
   text-align: center;
   padding: 20px;
 }
 
-/* STREAM */
 .container {
   display: flex;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
   padding: 20px;
-
   opacity: 0;
   transform: scale(0.95);
   transition: 1s ease;
@@ -137,7 +126,6 @@ iframe {
   border-radius: 10px;
 }
 
-/* BUTTONS */
 .btn {
   display: inline-block;
   padding: 12px 18px;
@@ -150,24 +138,17 @@ iframe {
 
 .btn:hover {
   transform: scale(1.08);
-  box-shadow: 0 0 15px rgba(255,255,255,0.4);
-}
-
-.btn:active {
-  transform: scale(0.95);
 }
 
 .tg { background: #2AABEE; }
 .dc { background: #5865F2; }
 .st { background: #1b2838; }
 
-/* CONTACTS */
 .contacts {
   text-align: center;
   padding: 40px;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
   iframe {
     width: 95%;
@@ -184,23 +165,21 @@ iframe {
 
 <body>
 
-<!-- INTRO -->
 <div id="intro">
   <h1>BETTER CALL LESYF</h1>
 </div>
 
-<header>
-  BETTER CALL LESYF ⚖️
-</header>
+<audio id="introSound" src="phone-ring.mp3" preload="auto"></audio>
+<audio id="clickSound" src="historical-antique-phone-ring-01.mp3" preload="auto"></audio>
+
+<header>BETTER CALL LESYF ⚖️</header>
 
 <section class="hero fade">
   <h1>SAUL OFFICE</h1>
   <p>стримы, игры и хаос</p>
 </section>
 
-<div class="symbols fade">
-  ⚖ ⚔ LESYF ⚔ ⚖
-</div>
+<div class="symbols fade">⚖ ⚔ LESYF ⚔ ⚖</div>
 
 <div class="block fade">
   <h2>ОБО МНЕ</h2>
@@ -208,30 +187,20 @@ iframe {
 </div>
 
 <div class="container fade">
-  <iframe
-    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-    height="400"
-    width="700"
-    allowfullscreen>
-  </iframe>
+  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+    height="400" width="700" allowfullscreen></iframe>
 
-  <iframe
-    src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
-    height="400"
-    width="300">
-  </iframe>
+  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+    height="400" width="300"></iframe>
 </div>
 
 <section class="contacts fade">
   <h2>Контакты</h2>
 
-  <a class="btn tg" href="https://t.me/T1mas_Shelbi">Telegram</a>
-  <a class="btn dc" href="https://discord.com/users/artem_shelbyl">Discord</a>
-  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/">Steam</a>
+  <a class="btn tg" href="https://t.me/T1mas_Shelbi" target="_blank" rel="noopener noreferrer">Telegram</a>
+  <a class="btn dc" href="https://discord.com/users/artem_shelbyl" target="_blank" rel="noopener noreferrer">Discord</a>
+  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/" target="_blank" rel="noopener noreferrer">Steam</a>
 </section>
-
-<!-- SOUND -->
-<audio id="clickSound" src="historical-antique-phone-ring-01.mp3" preload="auto"></audio>
 
 <script>
 const elements = document.querySelectorAll('.fade');
@@ -240,9 +209,7 @@ function checkScroll() {
   const trigger = window.innerHeight * 0.85;
 
   elements.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-
-    if (top < trigger) {
+    if (el.getBoundingClientRect().top < trigger) {
       el.classList.add('show');
     }
   });
@@ -251,27 +218,37 @@ function checkScroll() {
 window.addEventListener('scroll', checkScroll);
 window.addEventListener('load', checkScroll);
 
-/* звук */
-function playSound() {
+/* клики */
+function playClick() {
   const sound = document.getElementById("clickSound");
   sound.currentTime = 0;
   sound.volume = 0.5;
   sound.play();
 }
 
-/* кнопки */
-document.querySelectorAll('.btn').forEach(btn => {
-  btn.addEventListener('click', playSound);
+document.querySelectorAll('.btn').forEach(b => {
+  b.addEventListener('click', playClick);
 });
 
-/* стрим */
-window.addEventListener('load', () => {
-  const container = document.querySelector('.container');
-  container.classList.add('show');
-  container.addEventListener('click', playSound);
+/* интро звук */
+let introPlayed = false;
+
+function playIntroSound() {
+  if (introPlayed) return;
+  introPlayed = true;
+
+  const sound = document.getElementById("introSound");
+  sound.volume = 0.6;
+
+  sound.play().catch(() => {
+    document.addEventListener("click", () => sound.play(), { once: true });
+  });
+}
+
+window.addEventListener("load", () => {
+  setTimeout(playIntroSound, 500);
 });
 </script>
 
 </body>
 </html>
-```

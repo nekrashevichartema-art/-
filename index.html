@@ -11,7 +11,6 @@ body {
   font-family: Arial Black, Arial, sans-serif;
   color: white;
   overflow-x: hidden;
-  /* Фикс наложения слоев: делаем фон частью body, а не псевдоэлемента */
   background: radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.85)), 
               url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center/cover fixed;
 }
@@ -34,7 +33,7 @@ body::after {
   align-items: center;
   z-index: 9999;
   animation: fadeOut 4.5s ease forwards;
-  pointer-events: none; /* Чтобы интро не мешало кликать после исчезновения */
+  pointer-events: none;
 }
 
 #intro h1 {
@@ -88,7 +87,6 @@ header {
   to { text-shadow: 0 0 20px #f5c518, 0 0 30px #f5c518; }
 }
 
-/* Базовый класс для плавной анимации появления */
 .fade {
   opacity: 0;
   transform: translateY(40px);
@@ -136,9 +134,9 @@ iframe {
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
   max-width: 100%;
+  background: #000; /* Добавляем фон, чтобы было видно область загрузки */
 }
 
-/* Стили для чата и плеера отдельно */
 .twitch-player {
   width: 700px;
   height: 400px;
@@ -194,14 +192,13 @@ iframe {
   }
 
   .twitch-chat {
-    display: block; /* Показываем чат на мобильных */
+    display: block;
     width: 100%;
-    height: 350px;  /* Комфортная высота для чата на мобильных */
+    height: 350px;
     max-width: 600px;
     margin: 0 auto;
   }
 
-  /* Дополнительная гарантия для iframe */
   iframe.twitch-chat {
     width: 100% !important;
     height: 350px !important;
@@ -216,7 +213,6 @@ iframe {
   <h1>BETTER CALL LESYF</h1>
 </div>
 
-<!-- Аудиофайлы -->
 <audio id="introSound" src="phone-ring.mp3" preload="auto"></audio>
 <audio id="clickSound" src="historical-antique-phone-ring-01.mp3" preload="auto"></audio>
 
@@ -234,13 +230,21 @@ iframe {
   <p>Стримы, игры и стиль в духе Better Call Saul. Добро пожаловать в офис самого безбашенного адвоката Твича.</p>
 </div>
 
-<!-- Контейнер с плеером и чатом -->
 <div class="container fade">
-  <iframe class="twitch-player" src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-    allowfullscreen></iframe>
+  <!-- ВАЖНО: Добавляем sandbox и allow атрибуты для совместимости -->
+  <iframe 
+    class="twitch-player" 
+    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io&muted=false"
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    allowfullscreen
+    sandbox="allow-scripts allow-same-origin allow-popups allow-presentation allow-forms">
+  </iframe>
 
-  <iframe class="twitch-chat" src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
-    ></iframe>
+  <iframe 
+    class="twitch-chat" 
+    src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io&darkpopout"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox">
+  </iframe>
 </div>
 
 <section class="contacts fade">
@@ -255,8 +259,7 @@ iframe {
 const elements = document.querySelectorAll('.fade');
 
 function checkScroll() {
-  const trigger = window.innerHeight * 0.88; // Чуть увеличили область срабатывания
-
+  const trigger = window.innerHeight * 0.88;
   elements.forEach(el => {
     if (el.getBoundingClientRect().top < trigger) {
       el.classList.add('show');
@@ -286,30 +289,60 @@ const introSound = document.getElementById("introSound");
 function tryPlayIntro() {
   if (introPlayed) return;
   introSound.volume = 0.5;
-  
   introSound.play()
     .then(() => {
       introPlayed = true;
-      // Убираем слушатели, если звук успешно заиграл
       document.removeEventListener('click', tryPlayIntro);
       document.removeEventListener('keydown', tryPlayIntro);
       document.removeEventListener('touchstart', tryPlayIntro);
     })
     .catch(() => {
-      // Если браузер заблокировал, звук включится автоматически при первом действии
       console.log("Ожидание действия пользователя для включения звука...");
     });
 }
 
-// Пытаемся включить через полсекунды
 window.addEventListener("load", () => {
   setTimeout(tryPlayIntro, 500);
 });
 
-// Навешиваем слушатели на случай блокировки браузером
 document.addEventListener('click', tryPlayIntro);
 document.addEventListener('keydown', tryPlayIntro);
 document.addEventListener('touchstart', tryPlayIntro);
+
+// Дополнительный обходной путь для Яндекс.Браузера: 
+// Проверяем через 2 секунды, загрузился ли чат, если нет — пробуем перезагрузить iframe
+setTimeout(() => {
+  const chatFrame = document.querySelector('.twitch-chat');
+  if (chatFrame) {
+    // Пытаемся "оживить" iframe, если он пустой или не загрузился
+    const tryReload = () => {
+      const currentSrc = chatFrame.src;
+      chatFrame.src = 'about:blank';
+      setTimeout(() => {
+        chatFrame.src = currentSrc;
+      }, 100);
+    };
+    
+    // Добавляем обработчик для случая, если чат не прогрузился
+    chatFrame.addEventListener('load', () => {
+      console.log('Чат загрузился');
+    });
+    
+    // Проверка на пустой контент (если iframe не загрузился)
+    setTimeout(() => {
+      try {
+        // Если iframe остался пустым (не загрузился контент)
+        if (chatFrame.contentDocument && chatFrame.contentDocument.body && chatFrame.contentDocument.body.innerHTML === '') {
+          console.log('Перезагружаем чат для совместимости');
+          tryReload();
+        }
+      } catch(e) {
+        // CORS может блокировать доступ к contentDocument, это нормально
+        console.log('Не удалось проверить содержимое iframe (CORS)');
+      }
+    }, 3000);
+  }
+}, 2000);
 </script>
 
 </body>

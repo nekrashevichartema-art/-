@@ -53,7 +53,7 @@ body::after {
 }
 
 @keyframes fadeOut {
-  0% { opacity: 1; visible: visible; }
+  0% { opacity: 1; visibility: visible; }
   80% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
 }
@@ -125,12 +125,28 @@ header {
   gap: 20px;
   flex-wrap: wrap;
   padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 iframe {
   border: 2px solid #f5c518;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  max-width: 100%;
+}
+
+/* Стили для чата и плеера отдельно */
+.twitch-player {
+  width: 700px;
+  height: 400px;
+}
+
+.twitch-chat {
+  width: 300px;
+  height: 400px;
 }
 
 .btn {
@@ -162,20 +178,33 @@ iframe {
 /* Мобильная адаптивность */
 @media (max-width: 768px) {
   .hero h1 { font-size: 32px; }
-  
-  iframe {
-    width: 100%;
-    max-width: 100%;
-    height: 250px;
-  }
-
-  /* Скрываем чат твича на мобилках, так как он не влезает по ширине */
-  iframe[src*="chat"] {
-    display: none;
-  }
 
   .container {
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
+    gap: 15px;
+  }
+
+  .twitch-player {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  .twitch-chat {
+    display: block; /* Показываем чат на мобильных */
+    width: 100%;
+    height: 350px;  /* Комфортная высота для чата на мобильных */
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Дополнительная гарантия для iframe */
+  iframe.twitch-chat {
+    width: 100% !important;
+    height: 350px !important;
   }
 }
 </style>
@@ -205,13 +234,13 @@ iframe {
   <p>Стримы, игры и стиль в духе Better Call Saul. Добро пожаловать в офис самого безбашенного адвоката Твича.</p>
 </div>
 
-<!-- Фикс: Анимация вешается на сам контейнер, и он плавно появляется -->
+<!-- Контейнер с плеером и чатом -->
 <div class="container fade">
-  <iframe src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
-    height="400" width="700" allowfullscreen></iframe>
+  <iframe class="twitch-player" src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io"
+    allowfullscreen></iframe>
 
-  <iframe src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
-    height="400" width="300"></iframe>
+  <iframe class="twitch-chat" src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io"
+    ></iframe>
 </div>
 
 <section class="contacts fade">

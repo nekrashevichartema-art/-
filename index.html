@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Better Call Lesyf</title>
+
+<script>
+  // Помечаем, что JS работает: без него блоки .fade остаются видимыми
+  document.documentElement.classList.add('js');
+</script>
+
+<style>
+:root {
+  --gold: #f5c518;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Arial Black", Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
+  background: #111;
+}
+
+/* Фон вынесен в отдельный слой: корректно работает на iOS/Android.
+   Лучше скачать картинку и положить рядом с index.html, например: url('office.jpg') */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at center, rgba(0,0,0,0.25), rgba(0,0,0,0.85)),
+    url('https://i.redd.it/i-made-sauls-office-in-3d-as-a-tribute-to-one-of-the-best-v0-at3sjmp1ooh91.jpg?width=1920&format=pjpg&auto=webp&s=07e3ce6f7265e76fe28f5d84930aab088d1ad919') center / cover no-repeat;
+}
+
+/* Виньетка */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.8) 100%);
+}
+
+/* ---------- Интро ---------- */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: none;
+  animation: fadeOut 4.5s ease forwards;
+}
+
+#intro h1 {
+  margin: 0;
+  padding: 20px;
+  font-size: 52px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-align: center;
+  animation: logoIn 2.5s ease forwards;
+}
+
+@keyframes logoIn {
+  0%   { opacity: 0; transform: scale(0.85); }
+  60%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+  0%   { opacity: 1; visibility: visible; }
+  80%  { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* ---------- Шапка ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 15px;
+  text-align: center;
+  color: var(--gold);
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(245, 197, 24, 0.3);
+}
+
+/* ---------- Контент ---------- */
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-size: 48px;
+  animation: glow 3s infinite alternate;
+}
+
+.hero p {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px var(--gold), 0 0 10px rgba(245, 197, 24, 0.5); }
+  to   { text-shadow: 0 0 20px var(--gold), 0 0 30px var(--gold); }
+}
+
+/* Плавное появление: работает только если JS включён */
+.js .fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.js .fade.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.symbols {
+  text-align: center;
+  font-size: 24px;
+  color: var(--gold);
+  margin: 20px 0;
+}
+
+.block {
+  text-align: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.block p {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+iframe {
+  border: 2px solid var(--gold);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  max-width: 100%;
+  background: #000;
+}
+
+.twitch-player {
+  width: 700px;
+  height: 400px;
+}
+
+.twitch-chat {
+  width: 300px;
+  height: 400px;
+}
+
+/* ---------- Кнопки ---------- */
+.contacts {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 8px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 6px 12px rgba(245, 197, 24, 0.2);
+}
+
+.tg { background: #2AABEE; }
+.dc { background: #5865F2; }
+.st { background: #1b2838; border: 1px solid #2a475e; }
+
+/* ---------- Мобильная версия ---------- */
+@media (max-width: 768px) {
+  #intro h1 { font-size: 32px; letter-spacing: 2px; }
+  .hero h1 { font-size: 32px; }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .twitch-player {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    min-height: 200px;
+  }
+
+  .twitch-chat {
+    width: 100%;
+    max-width: 600px;
+    height: 350px;
+  }
+}
+
+/* Уважаем настройку «уменьшить анимацию» */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 { animation: none; }
+  .js .fade { transition: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  <h1>BETTER CALL LESYF</h1>
+</div>
+
+<!-- Файлы звуков должны лежать рядом с index.html -->
+<audio id="introSound" src="phone-ring.mp3" preload="auto"></audio>
+<audio id="clickSound" src="historical-antique-phone-ring-01.mp3" preload="auto"></audio>
+
+<header>BETTER CALL LESYF ⚖️</header>
+
+<section class="hero fade">
+  <h1>SAUL OFFICE</h1>
+  <p>стримы, игры и хаос</p>
+</section>
+
+<div class="symbols fade">⚖ ⚔ LESYF ⚔ ⚖</div>
+
+<div class="block fade">
+  <h2>ОБО МНЕ</h2>
+  <p>Стримы, игры и стиль в духе Better Call Saul. Добро пожаловать в офис самого безбашенного адвоката Твича.</p>
+</div>
+
+<div class="container fade">
+  <!-- parent: домен сайта + localhost для проверки на своём компьютере.
+       muted=true: браузеры всё равно блокируют автозапуск со звуком,
+       зритель включает звук сам. -->
+  <iframe
+    class="twitch-player"
+    title="Стрим say_lesyf на Twitch"
+    src="https://player.twitch.tv/?channel=say_lesyf&parent=nekrashevichartema-art.github.io&parent=localhost&muted=true"
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <iframe
+    class="twitch-chat"
+    title="Чат say_lesyf на Twitch"
+    src="https://www.twitch.tv/embed/say_lesyf/chat?parent=nekrashevichartema-art.github.io&parent=localhost&darkpopout">
+  </iframe>
+</div>
+
+<section class="contacts fade">
+  <h2>Контакты</h2>
+  <a class="btn tg" href="https://t.me/T1mas_Shelbi" target="_blank" rel="noopener noreferrer">Telegram</a>
+  <!-- ЗАМЕНИ ВАШ_DISCORD_ID на числовой ID (Настройки Discord → Расширенные → Режим разработчика,
+       затем ПКМ по профилю → Копировать ID) или на ссылку-приглашение https://discord.gg/код -->
+  <a class="btn dc" href="https://discord.com/users/ВАШ_DISCORD_ID" target="_blank" rel="noopener noreferrer">Discord</a>
+  <a class="btn st" href="https://steamcommunity.com/profiles/76561199700178651/" target="_blank" rel="noopener noreferrer">Steam</a>
+</section>
+
+<script>
+// ---------- Плавное появление блоков ----------
+const fadeEls = document.querySelectorAll('.fade');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  fadeEls.forEach(el => observer.observe(el));
+} else {
+  fadeEls.forEach(el => el.classList.add('show'));
+}
+
+// ---------- Звук интро ----------
+// Браузеры блокируют автозвук, поэтому пробуем сразу, а если не вышло,
+// ждём первого касания, но только пока идёт интро (4,5 секунды).
+const INTRO_MS = 4500;
+const introSound = document.getElementById('introSound');
+const clickSound = document.getElementById('clickSound');
+const interactionEvents = ['click', 'keydown', 'touchstart'];
+let introPlayed = false;
+
+function stopWaiting() {
+  interactionEvents.forEach(e => document.removeEventListener(e, tryPlayIntro));
+}
+
+function tryPlayIntro() {
+  if (introPlayed) return;
+  introSound.volume = 0.5;
+  introSound.play()
+    .then(() => {
+      introPlayed = true;
+      stopWaiting();
+    })
+    .catch(() => { /* ждём действия пользователя */ });
+}
+
+interactionEvents.forEach(e => document.addEventListener(e, tryPlayIntro));
+window.addEventListener('load', () => setTimeout(tryPlayIntro, 500));
+
+// Когда интро закончилось, звонок больше не запускаем
+setTimeout(() => {
+  stopWaiting();
+  introSound.pause();
+}, INTRO_MS);
+
+// ---------- Звук при клике на кнопки ----------
+function playClick() {
+  introSound.pause();
+  clickSound.currentTime = 0;
+  clickSound.volume = 0.4;
+  clickSound.play().catch(() => {});
+}
+
+document.querySelectorAll('.btn').forEach(b => b.addEventListener('click', playClick));
+</script>
+
+</body>
+</html>
